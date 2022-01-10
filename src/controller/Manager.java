@@ -82,10 +82,7 @@ public class Manager<generatorSubtaskID> {
         return new ArrayList<>();
     }
 
-    // Получение списка всех подзадач определённого эпика.
-    public ArrayList<Subtask> findAllOfEpic(Epic epic) {
-        return epics.get(epic.getID()).getSubtask();
-    }
+
 
     //  Получение задачи любого типа по идентификатору.
     public Task findTaskId(Integer id) {
