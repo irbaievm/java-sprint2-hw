@@ -12,9 +12,33 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Manager<generatorSubtaskID> {
-    HashMap<Integer, Task> tasks = new HashMap<>();
-    HashMap<Integer, Subtask> subtasks = new HashMap<>();
-    HashMap<Integer, Epic> epics = new HashMap<>();
+    public HashMap<Integer, Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(HashMap<Integer, Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public HashMap<Integer, Subtask> getSubtasks() {
+        return subtasks;
+    }
+
+    public void setSubtasks(HashMap<Integer, Subtask> subtasks) {
+        this.subtasks = subtasks;
+    }
+
+    public HashMap<Integer, Epic> getEpics() {
+        return epics;
+    }
+
+    public void setEpics(HashMap<Integer, Epic> epics) {
+        this.epics = epics;
+    }
+
+    private HashMap<Integer, Task> tasks = new HashMap<>();
+    private HashMap<Integer, Subtask> subtasks = new HashMap<>();
+    private HashMap<Integer, Epic> epics = new HashMap<>();
 
     int generatorTaskID = 0;
     int generatorSubtaskID = 0;
@@ -24,7 +48,6 @@ public class Manager<generatorSubtaskID> {
     public Task createTask(Task task) {
         int ID = ++generatorTaskID;
         final Task value = new Task(task.getName(), task.getDescription(), ID, NEW);
-        //value.setStatus(NEW);
         if (tasks.containsKey(task.getID())) {
             System.out.println("Задача с таким ID существует = " + task.getID());
             return null;
@@ -74,12 +97,8 @@ public class Manager<generatorSubtaskID> {
     }
 
     //	Получение списка всех подзадач определённого эпика.
-    public ArrayList<Task> getAllSubtaskEpic(Task epic) {
-        return getAllSubtaskEpic(epic.getID());
-    }
-
-    public ArrayList<Task> getAllSubtaskEpic(Integer epicID) {
-        return new ArrayList<>();
+    public ArrayList<Subtask> getAllSubtaskEpics(Epic epic) {
+        return epic.getSubtask();
     }
 
 

@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         Manager manager = new Manager();
 
-/*
+
         System.out.println("Создаем задачу: ");
         Task task = new Task("Задача ", "Тестовая задача", 1, NEW);
         manager.createTask(task);
@@ -28,11 +28,6 @@ public class Main {
         System.out.println(subtask);
         System.out.println(subtask2);
         System.out.println("получение списка задач по эпику");
-
-        // System.out.println(subtask);
-       // System.out.println(subtask.getID());
-       // System.out.println(subtask.getEpicID());
-*/
 
 
     }

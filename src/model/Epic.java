@@ -7,16 +7,7 @@ public class Epic extends Task {
 
 
     public Epic(String name, String description, int ID) {
-        super(name,description,ID);
-    }
-
-    @Override
-    public void setStatus(String status) {
-        super.setStatus(newStatus());
-    }
-
-    private String newStatus() {
-        return "обновленный статус";
+        super(name, description, ID);
     }
 
 
