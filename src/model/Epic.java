@@ -19,4 +19,13 @@ public class Epic extends Task {
     public ArrayList<Subtask> getSubtask() {
         return subtask;
     }
+    public String toString() {
+        return "Epic {" +
+                "name = '" + super.getName() + '\'' +
+                ", description = '" + super.getDescription() + '\'' +
+                ", id = " + ID +
+                ", status = '" + super.getStatus() + '\'' +
+
+                '}';
+    }
 }

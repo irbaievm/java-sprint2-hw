@@ -19,8 +19,7 @@ public class Main {
         Epic epic = new Epic("Эпик ", "тестовый эпик", 2);
         manager.createEpic(epic);
         System.out.println(manager.getAllEpic());
-        System.out.println("");
-        System.out.println("создаем подзадачу");
+        System.out.println("создаем подзадачу:");
         Subtask subtask = new Subtask("Подзадача ", "тестовая подзадача", 1, NEW, 1);
         Subtask subtask2 = new Subtask("Подзадача ", "тестовая подзадача", 2, NEW, 1);
         manager.createSubtask(subtask);
