@@ -1,15 +1,11 @@
 package controller;
-
 import model.Task;
 import model.Subtask;
 import model.Epic;
-
-
 import static model.Status.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class Manager<generatorSubtaskID> {
     public HashMap<Integer, Task> getTasks() {
