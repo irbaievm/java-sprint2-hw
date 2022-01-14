@@ -20,8 +20,8 @@ public class Epic extends Task {
         return subtask;
     }
 
-
-    public void test() {
+//для тестирования
+    public void testStatusType() {
         int cntSize = subtask.size();
         int statusNew = 0;
         int statusDone = 0;
@@ -31,7 +31,7 @@ public class Epic extends Task {
             } else if (st.getStatus().equals("DONE")) {
                 ++statusDone;
             }
-            System.out.println("все статусы: " + st.getStatus());
+           // System.out.println("все статусы: " + st.getStatus());
         }
         System.out.println("cntSize = " + cntSize + " statusNew = " + statusNew + " statusDone = " + statusDone);
     }
