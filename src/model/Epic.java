@@ -20,7 +20,7 @@ public class Epic extends Task {
         return subtask;
     }
 
-//для тестирования
+    //для тестирования
     public void testStatusType() {
         int cntSize = subtask.size();
         int statusNew = 0;
@@ -31,12 +31,12 @@ public class Epic extends Task {
             } else if (st.getStatus().equals("DONE")) {
                 ++statusDone;
             }
-           // System.out.println("все статусы: " + st.getStatus());
+            // System.out.println("все статусы: " + st.getStatus());
         }
         System.out.println("cntSize = " + cntSize + " statusNew = " + statusNew + " statusDone = " + statusDone);
     }
 
-@Override
+    @Override
     public String getStatus() {
         int cntSize = subtask.size();
         int statusNew = 0;
@@ -49,17 +49,17 @@ public class Epic extends Task {
             }
         }
         // если у эпика нет подзадач или все они имеют статус NEW, то статус должен быть NEW
-            if (subtask.size() == 0 || cntSize == statusNew) {
-                return Status.NEW;
-        // если все подзадачи имеют статус DONE, то и эпик считается завершённым — со статусом DONE
-            } else if (cntSize == statusDone) {
-                return Status.DONE;
-            }
-        // во всех остальных случаях статус должен быть IN_PROGRESS
-            else {
-                return Status.IN_PROGRESS;
-            }
+        if (subtask.size() == 0 || cntSize == statusNew) {
+            return Status.NEW;
+            // если все подзадачи имеют статус DONE, то и эпик считается завершённым — со статусом DONE
+        } else if (cntSize == statusDone) {
+            return Status.DONE;
         }
+        // во всех остальных случаях статус должен быть IN_PROGRESS
+        else {
+            return Status.IN_PROGRESS;
+        }
+    }
 
     @Override
     public String toString() {
