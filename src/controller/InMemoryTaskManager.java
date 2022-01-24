@@ -5,29 +5,38 @@ import model.Epic;
 import static model.Status.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 
-public class Manager<generatorSubtaskID> {
+public class InMemoryTaskManager implements TaskManager {
+
+
+    @Override
     public HashMap<Integer, Task> getTasks() {
         return tasks;
     }
 
+    @Override
     public void setTasks(HashMap<Integer, Task> tasks) {
         this.tasks = tasks;
     }
 
+    @Override
     public HashMap<Integer, Subtask> getSubtasks() {
         return subtasks;
     }
 
+    @Override
     public void setSubtasks(HashMap<Integer, Subtask> subtasks) {
         this.subtasks = subtasks;
     }
 
+    @Override
     public HashMap<Integer, Epic> getEpics() {
         return epics;
     }
 
+    @Override
     public void setEpics(HashMap<Integer, Epic> epics) {
         this.epics = epics;
     }
@@ -41,6 +50,7 @@ public class Manager<generatorSubtaskID> {
     int generatorEpicID = 0;
 
 
+    @Override
     public Task createTask(Task task) {
         int ID = ++generatorTaskID;
         final Task value = new Task(task.getName(), task.getDescription(), ID, NEW);
@@ -53,6 +63,7 @@ public class Manager<generatorSubtaskID> {
 
     }
 
+    @Override
     public Subtask createSubtask(Subtask subtask) {
         int ID = ++generatorSubtaskID;
         Subtask value = new Subtask(subtask.getName(), subtask.getDescription(), ID, NEW, subtask.getEpicID());
@@ -70,6 +81,7 @@ public class Manager<generatorSubtaskID> {
         return value;
     }
 
+    @Override
     public Epic createEpic(Epic epic) {
         int ID = ++generatorEpicID;
         final Epic value = new Epic(epic.getName(), epic.getDescription(), ID);
@@ -83,37 +95,44 @@ public class Manager<generatorSubtaskID> {
     }
 
     //  Получение списка всех задач.
-    public ArrayList<Task> getAllTasks() {
+    @Override
+    public List<Task> getAllTasks() {
         return new ArrayList<>(tasks.values());
     }
 
     //  Получение списка всех эпиков.
-    public ArrayList<Epic> getAllEpic() {
+    @Override
+    public List<Epic> getAllEpic() {
         return new ArrayList<>(epics.values());
     }
 
     //	Получение списка всех подзадач определённого эпика.
-    public ArrayList<Subtask> getAllSubtaskEpics(Epic epic) {
+    @Override
+    public List<Subtask> getAllSubtaskEpics(Epic epic) {
         return epic.getSubtask();
     }
 
 
 
     //  Получение задачи любого типа по идентификатору.
+    @Override
     public Task findTaskId(Integer id) {
         return tasks.get(id);
     }
 
+    @Override
     public Task findSubtaskId(Integer id) {
         return subtasks.get(id);
     }
 
+    @Override
     public Task findEpicId(Integer id) {
         return epics.get(id);
     }
 
     //  Обновление задачи любого типа по идентификатору. Новая версия объекта передаётся в виде параметра.
 
+    @Override
     public Task updateTask(Task changedTask) {
 
         Task saveTask = tasks.get(changedTask.getID());
@@ -126,6 +145,7 @@ public class Manager<generatorSubtaskID> {
         return saveTask;
     }
 
+    @Override
     public Subtask updateSubtask(Subtask changedSubtask) {
         Task saveSubtask = subtasks.get(changedSubtask.getID());
         if (saveSubtask == null) {
@@ -138,6 +158,7 @@ public class Manager<generatorSubtaskID> {
         return (Subtask) saveSubtask;
     }
 
+    @Override
     public Epic updateEpic(Epic changedEpic) {
         Task saveEpic = subtasks.get(changedEpic.getID());
         if (saveEpic == null) {
@@ -151,33 +172,40 @@ public class Manager<generatorSubtaskID> {
 
     //  Удаление ранее добавленных задач — всех и по идентификатору.
 
+    @Override
     public void deleteAllTask(Task task) {
         tasks.clear();
     }
 
+    @Override
     public Task deleteTaskId(Task id) {
         return tasks.remove(id);
     }
 
+    @Override
     public void deleteAllSubtask(Subtask subtask) {
         subtasks.clear();
     }
 
+    @Override
     public Task deleteAllSubtaskID(Task id) {
         return subtasks.remove(id);
     }
 
+    @Override
     public void deleteAllEpic(Epic epic) {
         epics.clear();
     }
 
+    @Override
     public Task deleteTaskId(Epic id) {
         return epics.remove(id);
     }
 
     // Обновление статуса эпика в зависимости от статуса подзадач
+    @Override
     public void updateStatus(Subtask subtask) {
-        ArrayList<Subtask> subtaskEpic = epics.get(subtask.getEpicID()).getSubtask();
+        List<Subtask> subtaskEpic = epics.get(subtask.getEpicID()).getSubtask();
         int cntDone = 0;
         int cntNEW = 0;
         for (Subtask objects : subtaskEpic) {
