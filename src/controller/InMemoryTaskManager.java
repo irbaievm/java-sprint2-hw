@@ -1,4 +1,5 @@
 package controller;
+import model.Status;
 import model.Task;
 import model.Subtask;
 import model.Epic;
@@ -66,7 +67,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public Subtask createSubtask(Subtask subtask) {
         int ID = ++generatorSubtaskID;
-        Subtask value = new Subtask(subtask.getName(), subtask.getDescription(), ID, NEW, subtask.getEpicID());
+        Subtask value = new Subtask(subtask.getName(), subtask.getDescription(), ID, Status.NEW, subtask.getEpicID());
         if (subtasks.containsKey(subtask.getID())) {
             System.out.println("Задача с таким ID существует = " + subtask.getID());
             return null;

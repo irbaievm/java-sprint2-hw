@@ -1,5 +1,6 @@
 import controller.InMemoryTaskManager;
 import model.Epic;
+import model.Status;
 import model.Subtask;
 import model.Task;
 
@@ -29,11 +30,11 @@ public class Main {
         Epic epic = (Epic) manager.getAllEpic().get(0);
 
         System.out.println("Статусы: ");
-        epic.getSubtask().get(0).setStatus("IN_PROGRESS"); //меняем статус у подзадачи 1 эпика
+        epic.getSubtask().get(0).setStatus(Status.IN_PROGRESS); //меняем статус у подзадачи 1 эпика
         System.out.println("Статус должен быть IN_PROGRESS, а на деле == " + epic.getStatus());;
         epic.testStatusType();
-        epic.getSubtask().get(0).setStatus("DONE"); //меняем статус у подзадачи 1 эпика
-        epic.getSubtask().get(1).setStatus("DONE"); //меняем статус у подзадачи 2 эпика
+        epic.getSubtask().get(0).setStatus(Status.DONE); //меняем статус у подзадачи 1 эпика
+        epic.getSubtask().get(1).setStatus(Status.DONE); //меняем статус у подзадачи 2 эпика
         System.out.println("Статус должен быть DONE, а на деле == " + epic.getStatus());
         epic.testStatusType();
         epic.getSubtask().clear();

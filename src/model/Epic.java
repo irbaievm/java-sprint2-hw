@@ -37,7 +37,7 @@ public class Epic extends Task {
     }
 
     @Override
-    public String getStatus() {
+    public Status getStatus() {
         int cntSize = subtask.size();
         int statusNew = 0;
         int statusDone = 0;
