@@ -1,4 +1,6 @@
 import controller.InMemoryTaskManager;
+import controller.Managers;
+import controller.TaskManager;
 import model.Epic;
 import model.Status;
 import model.Subtask;
@@ -8,7 +10,7 @@ import static model.Status.NEW;
 
 public class Main {
     public static void main(String[] args) {
-        InMemoryTaskManager manager = new InMemoryTaskManager();
+        final TaskManager manager = Managers.getDefaul();
 
 
         System.out.println("Создаем задачу: ");
