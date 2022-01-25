@@ -122,13 +122,26 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public Task findSubtaskId(Integer id) {
-        return subtasks.get(id);
+    public Subtask findSubtaskId(Integer id) {
+        final Subtask subTask = subtasks.get(id);
+        if (history.size() == 10) {
+            history.remove(0);
+        }
+        history.add(subTask);
+        return subTask;
     }
 
     @Override
-    public Task findEpicId(Integer id) {
-        return epics.get(id);
+    public Epic findEpicId(Integer id) {
+        final Epic epic = epics.get(id);
+        if (epic == null) {
+            return null;
+        }
+        if (history.size() == 10) {
+            history.remove(0); // Удалить в начале
+        }
+        history.add(epic); // Добавить в конец
+        return epic;
     }
 
     //  Обновление задачи любого типа по идентификатору. Новая версия объекта передаётся в виде параметра.
@@ -223,6 +236,13 @@ public class InMemoryTaskManager implements TaskManager {
         } else {
             epics.get(subtask.getEpicID()).setStatus(IN_PROGRESS);
         }
+    }
+
+    List<Task> history = new ArrayList<>();
+    @Override
+    public List<Task> history() {
+
+        return history;
     }
 }
 

@@ -38,9 +38,9 @@ public interface TaskManager {
     //  Получение задачи любого типа по идентификатору.
     Task findTaskId(Integer id);
 
-    Task findSubtaskId(Integer id);
+    Subtask findSubtaskId(Integer id);
 
-    Task findEpicId(Integer id);
+    Epic findEpicId(Integer id);
 
     Task updateTask(Task changedTask);
 
@@ -62,4 +62,6 @@ public interface TaskManager {
 
     // Обновление статуса эпика в зависимости от статуса подзадач
     void updateStatus(Subtask subtask);
+
+    List<Task> history();
 }
