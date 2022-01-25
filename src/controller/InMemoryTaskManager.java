@@ -14,6 +14,15 @@ import java.util.HashMap;
 
 public class InMemoryTaskManager implements TaskManager {
 
+    private HashMap<Integer, Task> tasks = new HashMap<>();
+    private HashMap<Integer, Subtask> subtasks = new HashMap<>();
+    private HashMap<Integer, Epic> epics = new HashMap<>();
+    private List<Task> history = new LinkedList<>();
+
+    int generatorTaskID = 0;
+    int generatorSubtaskID = 0;
+    int generatorEpicID = 0;
+
 
     @Override
     public HashMap<Integer, Task> getTasks() {
@@ -44,15 +53,6 @@ public class InMemoryTaskManager implements TaskManager {
     public void setEpics(HashMap<Integer, Epic> epics) {
         this.epics = epics;
     }
-
-    private HashMap<Integer, Task> tasks = new HashMap<>();
-    private HashMap<Integer, Subtask> subtasks = new HashMap<>();
-    private HashMap<Integer, Epic> epics = new HashMap<>();
-
-    int generatorTaskID = 0;
-    int generatorSubtaskID = 0;
-    int generatorEpicID = 0;
-
 
     @Override
     public Task createTask(Task task) {
@@ -120,37 +120,28 @@ public class InMemoryTaskManager implements TaskManager {
     //  Получение задачи любого типа по идентификатору.
     @Override
     public Task findTaskId(Integer id) {
-        return tasks.get(id);
+        final Task task = tasks.get(id);
+        addHistory(task);
+        return task;
     }
 
     @Override
     public Subtask findSubtaskId(Integer id) {
         final Subtask subTask = subtasks.get(id);
-        if (history.size() == 10) {
-            history.remove(0);
-        }
-        history.add(subTask);
+        addHistory(subTask);
         return subTask;
     }
 
     @Override
     public Epic findEpicId(Integer id) {
         final Epic epic = epics.get(id);
-        if (epic == null) {
-            return null;
-        }
-        if (history.size() == 10) {
-            history.remove(0); // Удалить в начале
-        }
-        history.add(epic); // Добавить в конец
+        addHistory(epic);
         return epic;
     }
 
     //  Обновление задачи любого типа по идентификатору. Новая версия объекта передаётся в виде параметра.
-
     @Override
     public Task updateTask(Task changedTask) {
-
         Task saveTask = tasks.get(changedTask.getID());
         if (saveTask == null) {
             return null;
@@ -187,7 +178,6 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     //  Удаление ранее добавленных задач — всех и по идентификатору.
-
     @Override
     public void deleteAllTask(Task task) {
         tasks.clear();
@@ -240,12 +230,18 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
-    List<Task> history = new LinkedList<>();
-
     @Override
     public List<Task> history() {
-
         return history;
+    }
+
+    public void addHistory(Task task) {
+        if (task == null) {
+        }
+        if (history.size() == 10) {
+            history.remove(0); // Удалить в начале
+        }
+        history.add(task); // Добавить в конец
     }
 }
 
