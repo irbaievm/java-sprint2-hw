@@ -1,11 +1,14 @@
 package controller;
+
 import model.Status;
 import model.Task;
 import model.Subtask;
 import model.Epic;
+
 import static model.Status.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.HashMap;
 
@@ -112,7 +115,6 @@ public class InMemoryTaskManager implements TaskManager {
     public List<Subtask> getAllSubtaskEpics(Epic epic) {
         return epic.getSubtask();
     }
-
 
 
     //  Получение задачи любого типа по идентификатору.
@@ -223,7 +225,7 @@ public class InMemoryTaskManager implements TaskManager {
         int cntDone = 0;
         int cntNEW = 0;
         for (Subtask objects : subtaskEpic) {
-            if (objects.getStatus().equals(DONE) ) {
+            if (objects.getStatus().equals(DONE)) {
                 cntDone++;
             } else if (objects.getStatus().equals(NEW)) {
                 cntNEW++;
@@ -231,14 +233,15 @@ public class InMemoryTaskManager implements TaskManager {
         }
         if (cntDone == subtaskEpic.size()) {
             epics.get(subtask.getEpicID()).setStatus(DONE);
-        } else if ( cntNEW == subtaskEpic.size()) {
+        } else if (cntNEW == subtaskEpic.size()) {
             epics.get(subtask.getEpicID()).setStatus(NEW);
         } else {
             epics.get(subtask.getEpicID()).setStatus(IN_PROGRESS);
         }
     }
 
-    List<Task> history = new ArrayList<>();
+    List<Task> history = new LinkedList<>();
+
     @Override
     public List<Task> history() {
 

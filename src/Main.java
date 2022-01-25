@@ -29,6 +29,9 @@ public class Main {
         System.out.println(subtask);
         System.out.println(subtask2);
 
+        manager.findSubtaskId(subtask.getID());
+        System.out.println(manager.history());
+
         Epic epic = (Epic) manager.getAllEpic().get(0);
 
         System.out.println("Статусы: ");
@@ -43,6 +46,14 @@ public class Main {
         System.out.println("Удалили подзадачи: getSubtask().clear()");
         System.out.println("Статус должен быть NEW, а на деле == " + epic.getStatus());
         epic.testStatusType();
+
+        System.out.println("История: ");
+        if (manager.history().isEmpty()) {
+            System.out.println("метод history не работает");
+        }
+        else {
+            System.out.println("метод history работает");
+        }
 
 
     }
