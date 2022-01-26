@@ -235,8 +235,9 @@ public class InMemoryTaskManager implements TaskManager {
         return history;
     }
 
-    public void addHistory(Task task) {
+    private void addHistory(Task task) {
         if (task == null) {
+            return;
         }
         if (history.size() == 10) {
             history.remove(0); // Удалить в начале
