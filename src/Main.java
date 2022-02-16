@@ -60,6 +60,7 @@ public class Main {
         System.out.println("Поиск эпика по id = 1");
         manager.findEpicId(1);
         System.out.println("Проверяем историю: " + manager.history());
+        System.out.println("количество записей в истории " + manager.history().size());
 
 
     }
