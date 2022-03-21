@@ -1,15 +1,18 @@
 package controller;
+
 import model.Task;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 
 public class InMemoryHistoryManager implements HistoryManager {
     static class Node {
-        final Task task;
-        Node last;
-        Node next;
+        private final Task task;
+        private Node last;
+        private Node next;
 
         public Node(Task task) {
             this.task = task;
@@ -17,12 +20,30 @@ public class InMemoryHistoryManager implements HistoryManager {
             this.next = null;
         }
     }
+
+    private Node start = null;
+    private Node end = null;
+    private HashMap<Integer, Node> map = new HashMap<>();
+
     public InMemoryHistoryManager() {
     }
 
-    Node start = null;
-    Node end = null;
-    HashMap<Integer, Node> map = new HashMap<>();
+    public Node getStart() {
+        return start;
+    }
+
+    public void setStart(Node start) {
+        this.start = start;
+    }
+
+    public Node getEnd() {
+        return end;
+    }
+
+    public void setEnd(Node end) {
+        this.end = end;
+    }
+
 
     @Override
     public void add(Task task) {
@@ -60,6 +81,7 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public void delete(Integer id) {
+        map.clear();
     }
 
     @Override

@@ -18,10 +18,19 @@ public class InMemoryTaskManager implements TaskManager {
     private HashMap<Integer, Subtask> subtasks = new HashMap<>();
     private HashMap<Integer, Epic> epics = new HashMap<>();
     private List<Task> history = new LinkedList<>();
+    private HistoryManager historyManager = new InMemoryHistoryManager();
 
     int generatorTaskID = 0;
     int generatorSubtaskID = 0;
     int generatorEpicID = 0;
+
+    public HistoryManager getHistoryManager() {
+        return historyManager;
+    }
+
+    public void setHistoryManager(HistoryManager historyManager) {
+        this.historyManager = historyManager;
+    }
 
 
     @Override
@@ -232,7 +241,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public List<Task> history() {
-        return history;
+        return getHistoryManager().getHistory();
     }
 
     private void addHistory(Task task) {
@@ -240,9 +249,10 @@ public class InMemoryTaskManager implements TaskManager {
             return;
         }
         if (history.size() == 10) {
-            history.remove(0); // Удалить в начале
+            //history.remove(0); // Удалить в начале
+            historyManager.delete(0);
         }
-        history.add(task); // Добавить в конец
+        historyManager.add(task); // Добавить в конец
     }
 }
 

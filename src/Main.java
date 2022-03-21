@@ -1,6 +1,4 @@
-import controller.InMemoryTaskManager;
-import controller.Managers;
-import controller.TaskManager;
+import controller.*;
 import model.Epic;
 import model.Status;
 import model.Subtask;
@@ -59,9 +57,16 @@ public class Main {
         System.out.println("Проверяем историю : " + manager.history());
         System.out.println("Поиск эпика по id = 1");
         manager.findEpicId(1);
+
         System.out.println("Проверяем историю: " + manager.history());
         System.out.println("количество записей в истории " + manager.history().size());
 
+
+
+        // InMemoryHistoryManager  hist = new InMemoryHistoryManager();
+       // hist.getHistory();
+
+        //System.out.println(hist.getHistory());
 
     }
 }
