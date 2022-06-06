@@ -62,9 +62,8 @@ public class Main {
         System.out.println("количество записей в истории " + manager.history().size());
 
 
-
         // InMemoryHistoryManager  hist = new InMemoryHistoryManager();
-       // hist.getHistory();
+        // hist.getHistory();
 
         //System.out.println(hist.getHistory());
 

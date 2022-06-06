@@ -249,11 +249,12 @@ public class InMemoryTaskManager implements TaskManager {
             return;
         }
         if (history.size() == 10) {
-            //history.remove(0); // Удалить в начале
             historyManager.delete(0);
+        } else {
+            historyManager.add(task); // Добавить в конец
         }
-        historyManager.add(task); // Добавить в конец
     }
+
 }
 
 

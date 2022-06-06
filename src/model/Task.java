@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Objects;
+
 import static model.Status.NEW;
 
 public class Task {
