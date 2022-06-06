@@ -86,7 +86,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     private void removeNode(Node node) {
-        // 1. Начало
+        //  в начале
         if (node == first) {
             if (node == last) {
                 first = null;
@@ -99,13 +99,13 @@ public class InMemoryHistoryManager implements HistoryManager {
             first = newFirst;
             return;
         }
-        // 3. Конец
+        // в конце
         if (node == last) {
             last = node.prev;
             node.next = null;
             return;
         }
-        // 2. Середина
+        // в середине
         final Node prev = node.prev;
         final Node next = node.next;
         prev.next = next;
