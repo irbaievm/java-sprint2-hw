@@ -16,7 +16,6 @@ public class InMemoryTaskManager implements TaskManager {
     HashMap<Integer, Task> tasks = new HashMap<>();
     HashMap<Integer, Subtask> subtasks = new HashMap<>();
     HashMap<Integer, Epic> epics = new HashMap<>();
-    //private List<Task> history = new LinkedList<>();
     private HistoryManager history = Managers.getDefaultHistory();
 
 
@@ -58,7 +57,6 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public Task createTask(Task task) {
         int ID = ++generatorTaskID;
-        //task.setID(ID); //new
         final Task value = new Task(task.getName(), task.getDescription(), ID, NEW);
         if (tasks.containsKey(task.getID())) {
             System.out.println("Задача с таким ID существует = " + task.getID());
@@ -180,7 +178,7 @@ public class InMemoryTaskManager implements TaskManager {
         saveSubtask.setDescription(changedSubtask.getDescription());
         saveSubtask.setName(changedSubtask.getName());
         saveSubtask.setStatus(changedSubtask.getStatus());
-        updateStatus(changedSubtask); // ?
+        updateStatus(changedSubtask);
         return saveSubtask;
     }
 
