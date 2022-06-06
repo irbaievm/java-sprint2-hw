@@ -4,10 +4,14 @@ import model.Epic;
 import model.Subtask;
 import model.Task;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import static model.Status.*;
 
 public interface TaskManager {
+
     HashMap<Integer, Task> getTasks();
 
     void setTasks(HashMap<Integer, Task> tasks);
@@ -30,10 +34,10 @@ public interface TaskManager {
     List<Task> getAllTasks();
 
     //  Получение списка всех эпиков.
-    List<Epic> getAllEpic();
+    List<Epic> getAllEpics();
 
     //	Получение списка всех подзадач определённого эпика.
-    List<Subtask> getAllSubtaskEpics(Epic epic);
+    List<Subtask> getAllSubtasksEpics(Epic epic);
 
     //  Получение задачи любого типа по идентификатору.
     Task findTaskId(Integer id);
@@ -48,20 +52,21 @@ public interface TaskManager {
 
     Epic updateEpic(Epic changedEpic);
 
-    void deleteAllTask(Task task);
+    void deleteAllTask();
 
-    Task deleteTaskId(Task id);
+    void deleteTaskId(int id);
 
-    void deleteAllSubtask(Subtask subtask);
+    void deleteAllSubtask();
 
-    Task deleteAllSubtaskID(Task id);
+    void deleteSubtaskID(int id);
 
-    void deleteAllEpic(Epic epic);
+    void deleteAllEpic();
 
-    Task deleteTaskId(Epic id);
+    void deleteEpicId(int id);
 
     // Обновление статуса эпика в зависимости от статуса подзадач
     void updateStatus(Subtask subtask);
 
-    List<Task> history();
+    List<Task> getHistory();
+
 }

@@ -1,6 +1,5 @@
 package model;
 
-
 public class Subtask extends Task {
     private Integer epicID;
 
@@ -8,7 +7,6 @@ public class Subtask extends Task {
         super(name, description, ID, aNew);
         this.epicID = epicID;
     }
-
 
     public Integer getEpicID() {
         return epicID;
